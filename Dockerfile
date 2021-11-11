@@ -7,7 +7,7 @@ RUN apt update && \
 RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ django==2.2.* future Pillow pylibmc captcha jinja2 psd-tools django-pylibmc django-simple-captcha && \
     rm -r /root/.cache
 
-RUN wget http://192.168.192.178:9000/github.com/haiwen/seafile-rpi/releases/download/v8.0.7/seafile-server-8.0.7-buster-arm64v8.tar.gz && \
+RUN wget https://github.com/haiwen/seafile-rpi/releases/download/v8.0.7/seafile-server-8.0.7-buster-arm64v8.tar.gz && \
     mkdir -p /opt/seafile/conf && \
     tar -xf seafile-server-8.0.7-buster-arm64v8.tar.gz -C /opt/seafile/ && \
     rm seafile-server-8.0.7-buster-arm64v8.tar.gz && \
