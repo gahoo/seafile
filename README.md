@@ -11,6 +11,10 @@ docker build -t seafile:8.0.7 .
 docker run --rm -it -p 8000:8000 -p 8080:8080 -p 8082:8082 seafile:8.0.7
 ```
 
+Username: admin@sea.file
+Password: seafile
+> Please change it after first login.
+
 ## Enviroments defaults
 - SERVICE_URL: http://127.0.0.1:8000
 - HUB_PORT: 8000, must be the same as above
