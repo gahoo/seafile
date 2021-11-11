@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+pushd /opt/seafile/conf
+sed "s#<SERVICE_URL>#${SERVICE_URL:-http://0.0.0.0}#g" -i ccnet.conf
+sed "s#<HUB_PORT>#${HUB_PORT:-8000}#g" -i gunicorn.conf.py
+sed "s#<WEBDAV_HOST>#${WEBDAV_HOST:-0.0.0.0}#g" -i seafdav.conf
+sed "s#<WEBDAV_PORT>#${WEBDAV_PORT:-8080}#g" -i seafdav.conf
+sed "s#<FILESERVER_PORT>#${FILESERVER_PORT:-8082}#g" -i seafile.conf
+popd
+
+seafile.sh start
+seahub.sh start $HUB_PORT
