@@ -4,7 +4,7 @@ RUN sed 's#ports.ubuntu.com#mirrors.aliyun.com#g' /etc/apt/sources.list -i
 RUN apt update && \
     apt install -y python3 python3-setuptools python3-pip memcached libmemcached-dev pwgen sqlite3 wget && \
     apt clean
-RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ django==2.2.* future Pillow pylibmc captcha jinja2 psd-tools django-pylibmc django-simple-captcha && \
+RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ django==2.2.* future Pillow pylibmc captcha jinja2 psd-tools django-pylibmc django-simple-captcha xmlx && \
     rm -r /root/.cache
 
 RUN wget https://github.com/haiwen/seafile-rpi/releases/download/v8.0.7/seafile-server-8.0.7-buster-arm64v8.tar.gz && \
@@ -14,16 +14,16 @@ RUN wget https://github.com/haiwen/seafile-rpi/releases/download/v8.0.7/seafile-
     find /opt/seafile/ -name 'Pillow*' |xargs rm -r && \
     find /opt/seafile/ -name 'PIL*'|xargs rm -r
 
+RUN apt install -y locales && \
+    localedef -f UTF-8 -i zh_CN zh_CN.UTF-8
+ENV LANG=zh_CN.UTF-8
+ENV LC_ALL=zh_CN.UTF-8
+
 ADD configuration.tar.gz /opt/seafile
 
 RUN cd /opt/seafile/seafile-server-8.0.7/seahub/media && \
     rm -r avatars && \
     ln -s ../../../seahub-data/avatars/
-
-RUN apt install -y locales && \
-    localedef -f UTF-8 -i zh_CN zh_CN.UTF-8
-ENV LANG=zh_CN.UTF-8
-ENV LC_ALL=zh_CN.UTF-8
 
 RUN useradd seafile && \
     chown seafile:seafile /opt/seafile/ && \
